@@ -12,11 +12,13 @@ namespace Model
     {
 
         private List <T> _animals  = new List<T>();    
-        public Manager Manager { get; set; } = new Manager();
+        public Manager Manager { get; set; }
+        public Doctor Doctor { get; set; }
         public void CreateInstance()
         {
             T animal = new T();
-            //animal.IAmHungry+=
+            animal.IAmHungry += Manager.OnHungry;
+            Doctor.Vox += animal.OnVox;
             _animals.Add(animal);
         }
     }
@@ -28,5 +30,15 @@ namespace Model
             Console.WriteLine($"Я несу тебе корм {args.CountFood}");
         }
 
+    }
+
+    public class Doctor
+    {
+        public event EventHandler Vox;
+
+        public void VoxInvoke()
+        {
+            Vox?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Model
     public interface IHomeAnimal
     {
         event HungryHandler IAmHungry;
-        event EventHandler IAmHungryStandart;
+        void OnVox(object sender, EventArgs args);
     }
 
     public delegate void HungryHandler(object sender, HungryEventArgs args);
@@ -30,8 +30,7 @@ namespace Model
     {
         public string Name { get; set; }
         public abstract event HungryHandler IAmHungry;
-        public event EventHandler IAmHungryStandart;
-        
+        public abstract void OnVox(object sender, EventArgs args);
     }
 
     public class Horse:Animal
@@ -47,6 +46,11 @@ namespace Model
         public void OnHungry(int count)
         {
             IAmHungry?.Invoke(this, new HungryEventArgs{ IsMeat = false, CountFood = count });
+        }
+
+        public override void OnVox(object sender, EventArgs args)
+        {
+           Console.WriteLine("Ok, I'm ready");
         }
     }
 }
