@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Zoo <T> where T : Animal, IAnimal, IHomeAnimal, new()
+    public class Zoo <T> where T : Animal
     {
 
         private List <T> _animals  = new List<T>();    
         public Manager Manager { get; set; }
         public Doctor Doctor { get; set; }
-        public void CreateInstance()
+        public void CreateInstance(T animal)
         {
-            T animal = new T();
+            //T animal = new T();
             animal.IAmHungry += Manager.OnHungry;
             Doctor.Vox += animal.OnVox;
             _animals.Add(animal);

@@ -35,7 +35,7 @@ namespace Model
 
     public class Horse:Animal
     {
-        //private Horse() { }
+        //public Horse() { }
 
         public Horse(string name)
         {
